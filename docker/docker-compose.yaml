@@ -1,0 +1,34 @@
+version: '3'
+services:
+    nginx:
+        build:
+            dockerfile: ./dockerfile/server/nginx.dockerfile
+            context: .
+        image: williansebastiao/nginx:latest
+        container_name: nginx
+        ports:
+            - "8000:80"
+        volumes:
+            - .:/var/www/app
+        depends_on:
+            -   php
+        networks:
+            - laravel
+    php:
+        build:
+            args:
+                user: ethos
+                uid: 1000
+            dockerfile: ./dockerfile/php/php8.dockerfile
+            context: .
+        image: williansebastiao/php:8
+        container_name: php
+        ports:
+        -   "9000:9000"
+        volumes:
+            - .:/var/www/app
+        networks:
+            - laravel
+networks:
+    laravel:
+        driver: bridge
