@@ -15,3 +15,5 @@ yarn-error.log
 /.vscode
 .idea
 .vscode
+/mysql
+mysql
