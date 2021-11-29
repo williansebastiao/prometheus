@@ -1,7 +1,7 @@
 version: '3'
 services:
   nginx:
-    image: williansebastiao/nginx:latest
+    image: williansebastiao/nginx:laravel
     container_name: nginx
     ports:
       - 8000:80
@@ -29,7 +29,7 @@ services:
     ports:
       - 3308:3306
     volumes:
-      - ./mysql:/var/lib/mysql
+      - /var/lib/mysql
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=no
       - MYSQL_DATABASE=${DB_DATABASE}
