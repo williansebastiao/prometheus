@@ -1,0 +1,9 @@
+version: '3'
+services:
+  fastapi:
+    image: williansebastiao/phyton:fastapi
+    container_name: fastapi
+    ports:
+      - 8003:8000
+    volumes:
+      - .:/src
