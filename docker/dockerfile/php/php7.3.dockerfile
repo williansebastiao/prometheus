@@ -12,6 +12,16 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip
 
+RUN apt-get install -y openssl libssl-dev libcurl4-openssl-dev
+
+RUN pecl install mongodb \
+    &&  echo "extension=mongodb.so" > $PHP_INI_DIR/conf.d/mongo.ini
+
+
+RUN apt-get update && apt-get install -y \
+    libzip-dev && \
+    docker-php-ext-install zip
+
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
