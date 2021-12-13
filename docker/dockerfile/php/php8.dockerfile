@@ -40,6 +40,9 @@ RUN mkdir -p /home/$user/.composer && \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+RUN cd /usr/local/etc/php/conf.d/ && \
+  echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini
+
 WORKDIR /var/www/app
 
 USER $user

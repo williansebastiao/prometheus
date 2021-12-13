@@ -1,19 +1,20 @@
 version: '3'
 services:
   nginx:
-    image: williansebastiao/nginx:laravel
+    image: ethos/nginx:latest
     container_name: nginx
     ports:
       - 8000:80
+      - 443:443
     volumes:
       - .:/var/www/app
     depends_on:
       - mysql
       - php
     networks:
-      - laravel
+      - ethos
   php:
-    image: williansebastiao/php:8
+    image: ethos/php:8
     container_name: php
     ports:
       - 9000:9000
@@ -22,7 +23,7 @@ services:
     depends_on:
       - mysql
     networks:
-      - laravel
+      - ethos
   mysql:
     image: mysql:8
     container_name: mysql
@@ -36,7 +37,7 @@ services:
       - MYSQL_USER=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
     networks:
-      - laravel
+      - ethos
 networks:
-  laravel:
+  ethos:
     driver: bridge

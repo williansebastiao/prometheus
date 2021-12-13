@@ -1,9 +1,0 @@
-version: '3'
-services:
-  nginx:
-    image: williansebastiao/nginx:static
-    container_name: nginx
-    ports:
-      - 8000:80
-    volumes:
-      - .:/var/www/app
