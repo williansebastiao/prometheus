@@ -5,7 +5,8 @@ ARG uid=1000
 
 RUN apt-get update && apt-get install -y \
     build-essential \
-    supervisor \
+    nodejs \
+    npm \
     git \
     curl \
     libonig-dev \
@@ -17,6 +18,8 @@ RUN apt-get update && apt-get install -y \
     make \
     sudo \
     openssl \
+    unzip \
+    chromium \
     libssl-dev \
     libcurl4-openssl-dev \
     libfreetype6-dev \
@@ -50,9 +53,10 @@ RUN mkdir -p /home/$user/.composer && \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+RUN npm install puppeteer --global
+
 RUN cd /usr/local/etc/php/conf.d/ && \
   echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini
 
 WORKDIR /var/www/app
-
 USER $user
