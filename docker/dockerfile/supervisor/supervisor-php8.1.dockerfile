@@ -1,4 +1,4 @@
-FROM williansebastiao/php:7.4
+FROM williansebastiao/php:8.1
 
 WORKDIR /var/www/app
 USER root

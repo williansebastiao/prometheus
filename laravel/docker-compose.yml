@@ -2,7 +2,7 @@ version: '3.8'
 services:
   nginx:
     image: williansebastiao/nginx:latest
-    container_name: nginx
+    container_name: nginx-${APP_ENV}
     ports:
       - 8000:80
       - 443:443
@@ -14,8 +14,8 @@ services:
     networks:
       - ethos
   php:
-    image: williansebastiao/php:7.4
-    container_name: php
+    image: williansebastiao/php:8.1
+    container_name: php-${APP_ENV}
     ports:
       - 9000:9000
     volumes:
@@ -24,7 +24,7 @@ services:
       - ethos
   mysql:
     image: mysql:8
-    container_name: mysql
+    container_name: mysql-${APP_ENV}
     ports:
       - 3308:3306
     volumes:
@@ -36,6 +36,13 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
     networks:
       - ethos
+  supervisor:
+      image: williansebastiao/supervisor:1.0
+      container_name: supervisor-${APP_ENV}
+      volumes:
+          - .:/var/www/app
+      networks:
+          - ethos
 networks:
   ethos:
     driver: bridge

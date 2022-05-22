@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('supervisor', function () {
+   \Illuminate\Support\Facades\Mail::to('willians@4vconnect.com')
+       ->queue(new \App\Mail\Report());
+    return response()->json(['message' => 'supervisor'], 200);
+});
